@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Days Until</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="https://upmeet.me/sitemap.xml">
+    <link rel="icon" href="/appicon.png" type="image/svg+xml">
+    <link rel="preload stylesheet" href="/style.css" as="style" type="text/css" crossorigin="anonymous">
+    <meta name="theme-color" content="#0038FF" />
+    <meta name="description" content="UpMeet makes your meetings more connected, seamless and effortless.">
+</head>
+
+<body>
+    <div class="container">
+        <img src="/white-icon.png" width="40px" />
+        <p>Pick a date...</p>
+        <input type="date" />
+        <br /><br />
+        <img src="/enter.svg" alt="Enter" width="150px" />
+    </div>
+
+    <center>
+        <div class="daysuntil">
+            <img src="/white-icon.png" width="39px" />
+            <p id="days"></p>
+            <p id="date"></p>
+            <button onclick="goAgain()" class="again">Use another date</button>
+        </div>
+    </center>
+
+    <script>
+        // on enter key press then show alert
+        document.addEventListener("keydown", function (event) {
+            if (event.key == "Enter") {
+                // get the date from the input with id date and get how long until that date in days
+                var date = document.querySelector("input").value;
+                var days = Math.floor((new Date(date) - new Date()) / 1000 / 60 / 60 / 24);
+                //alert("There are " + days + " days until " + date);
+
+                // insert the var days into span with id days
+                document.getElementById("days").textContent += days + " days until ";
+                document.getElementById("date").textContent += date;
+
+
+                var appBanners = document.getElementsByClassName('container');
+                for (var i = 0; i < appBanners.length; i++) {
+                    appBanners[i].style.display = 'none';
+                }
+
+                var daysUntil = document.getElementsByClassName('daysuntil');
+                for (var i = 0; i < daysUntil.length; i++) {
+                    daysUntil[i].style.display = 'block';
+                }
+
+            }
+        });
+    </script>
+
+    <script>
+        function goAgain() {
+            location.reload();
+        }
+    </script>
+
+    <style>
+        #days {
+            font-size: 55px;
+            margin: 0;
+
+        }
+
+        #date {
+            font-size: 30px;
+            margin: 0
+        }
+
+        .again {
+            background-color: #c2cfff;
+            color: rgb(0, 51, 255);
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 20px;
+            font-size: 20px;
+            cursor: pointer;
+            font-size:15px;
+            padding-left: 15px;
+            padding-right: 15px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .daysuntil {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            -o-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+
+            z-index: 100;
+        }
+    </style>
+</body>
+
+</html>
